@@ -1,9 +1,9 @@
 data "local_file" "ssh_key" {
-  filename = pathexpand("~/.ssh/id_rsa")
+  filename = pathexpand("~/.ssh/id_rsa.pub")
 }
 
 resource "aws_key_pair" "access_key" {
-  key_name = "restore key"
+  key_name = "workshop access key"
   public_key = "${data.local_file.ssh_key.content}"
 }
 
@@ -20,6 +20,7 @@ resource "aws_instance" "webserver" {
     Name = "Webserver API server"
     Purpose = "Terraform workshop"
   }
+
 }
 
 output "instance_ip" {
