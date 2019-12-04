@@ -3,7 +3,7 @@ data "local_file" "ssh_key" {
 }
 
 resource "random_string" "user_id" {
-  length = 5
+  length = 6
   lower = true
   upper = false
   special = false
@@ -26,6 +26,11 @@ resource "aws_instance" "webserver" {
   tags = {
     Name = "Workshop - ${random_string.user_id.result}"
     Purpose = "Terraform workshop"
+  }
+
+  lifecycle {
+    // prevent_destroy = true
+    ignore_changes = [ "key_name" ]
   }
 }
 
