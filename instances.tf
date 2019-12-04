@@ -8,6 +8,7 @@ resource "random_string" "user_id" {
   upper = false
   special = false
   number = false
+
 }
 
 resource "aws_key_pair" "access_key" {
