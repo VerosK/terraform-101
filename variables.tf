@@ -3,3 +3,8 @@ variable "aws_region" {
   default = "eu-central-1"
   type = string
 }
+
+variable "create_instance" {
+  type = bool
+  default = true
+}

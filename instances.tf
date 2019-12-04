@@ -24,22 +24,25 @@ resource "aws_instance" "webserver" {
   associate_public_ip_address = true
 
   tags = {
-    Name = "Workshop - ${random_string.user_id.result}"
+    Name = "Workshop - ${random_string.user_id.result} - ${count.index}"
     Purpose = "Terraform workshop"
   }
 
   lifecycle {
     // prevent_destroy = true
-    ignore_changes = [ "key_name" ]
+    ignore_changes = [
+      "key_name"]
   }
+
+  count = var.create_instance ? 2 : 0
 }
 
 resource "local_file" "ansible_inventory" {
   filename = "hosts.txt"
-  content = "${aws_instance.webserver.public_dns}"
+  content = "${join("\n", aws_instance.webserver.*.public_ip)}\n"
 }
 
 output "instance_ip" {
-  value = "${aws_instance.webserver.public_ip}"
+  value = "${aws_instance.webserver.*.public_ip}"
 }
 
