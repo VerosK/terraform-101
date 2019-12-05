@@ -29,6 +29,9 @@ resource "aws_key_pair" "a_key" {
   public_key = data.local_file.ssh_key.content
 }
 
+data "aws_security_group" "default_group" {
+  name = "allow-ssh-only"
+}
 
 resource "aws_instance" "webserver" {
   ami = data.aws_ami.debian_10.id
@@ -39,6 +42,8 @@ resource "aws_instance" "webserver" {
   associate_public_ip_address = true
 
   user_data = file("cloud-init/setup-nginx.yml")
+
+  security_groups = [ data.aws_security_group.default_group.name ]
 
   tags = {
     Name = "Terraform - ${random_string.user_id.result}"
@@ -53,4 +58,8 @@ resource "aws_instance" "webserver" {
   lifecycle {
     ignore_changes = [ "ami" ]
   }
+}
+
+output "ssh_command" {
+  value = "ssh admin@${aws_instance.webserver.public_dns}"
 }
