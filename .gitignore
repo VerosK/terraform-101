@@ -1,2 +1,4 @@
 aws-credentials.ini
 .terraform
+terraform.tfstate
+terraform.tfstate*
