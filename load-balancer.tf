@@ -13,7 +13,7 @@ resource "random_string" "user_id" {
 
 resource "aws_elb" "bar" {
   name               = "foobar-terraform-${random_string.user_id.result}"
-  availability_zones = ["eu-west-1a", "eu-west-1b"]
+  availability_zones = ["eu-central-1a", "eu-central-1b"]
 
   listener {
     instance_port     = 8000
