@@ -58,11 +58,16 @@ resource "aws_instance" "webserver" {
   lifecycle {
     ignore_changes = [ "ami" ]
   }
+
+  count = 3
 }
 
 resource "aws_elb_attachment" "attach" {
-  instance = aws_instance.webserver.id
+  // instance = "${element(count.index, aws_instance.webserver.*.id)}"
+  instance = aws_instance.webserver[count.index].id
   elb = aws_elb.central-lb.id
+
+  count = length(aws_instance.webserver)
 }
 
 output "ssh_command" {
