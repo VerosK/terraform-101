@@ -60,6 +60,11 @@ resource "aws_instance" "webserver" {
   }
 }
 
+resource "aws_elb_attachment" "attach" {
+  instance = aws_instance.webserver.id
+  elb = aws_elb.central-lb.id
+}
+
 output "ssh_command" {
   value = "ssh admin@${aws_instance.webserver.public_dns}"
 }
