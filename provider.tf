@@ -19,12 +19,3 @@ provider "aws" {
 
 }
 
-provider "aws" {
-  alias = "aws-eu-west"
-  region = "eu-west-1"
-  shared_credentials_file = "aws-credentials.ini"
-  profile                 = "default"
-
-  version = "~> 2.41"
-}
-
