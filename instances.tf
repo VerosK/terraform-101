@@ -38,6 +38,8 @@ resource "aws_instance" "webserver" {
 
   associate_public_ip_address = true
 
+  user_data = file("cloud-init/setup-nginx.yml")
+
   tags = {
     Name = "Terraform - ${random_string.user_id.result}"
     purpose = "terraform-training"
