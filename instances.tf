@@ -33,6 +33,11 @@ data "aws_security_group" "default_group" {
   name = "allow-ssh-only"
 }
 
+variable "availability_zones" {
+  type = list(string)
+  default = [ "eu-central-1a", "eu-central-1b", "eu-central-1c" ]
+}
+
 resource "aws_instance" "webserver" {
   ami = data.aws_ami.debian_10.id
   instance_type = "t3.micro"
@@ -40,9 +45,7 @@ resource "aws_instance" "webserver" {
   monitoring = false
 
   associate_public_ip_address = true
-
   user_data = file("cloud-init/setup-nginx.yml")
-
   security_groups = [ data.aws_security_group.default_group.name ]
 
   tags = {
@@ -59,6 +62,7 @@ resource "aws_instance" "webserver" {
     ignore_changes = [ "ami" ]
   }
 
+  availability_zone = "${element(var.availability_zones,count.index)}"
   count = 3
 }
 
