@@ -49,4 +49,8 @@ resource "aws_instance" "webserver" {
     delete_on_termination = true
     volume_size = 10
   }
+
+  lifecycle {
+    ignore_changes = [ "ami" ]
+  }
 }
