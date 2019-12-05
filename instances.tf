@@ -70,6 +70,6 @@ resource "aws_elb_attachment" "attach" {
   count = length(aws_instance.webserver)
 }
 
-output "ssh_command" {
-  value = "ssh admin@${aws_instance.webserver.public_dns}"
+output "ssh_targets" {
+  value = aws_instance.webserver.*.public_dns
 }
