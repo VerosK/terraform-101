@@ -25,6 +25,6 @@ data "local_file" "ssh_key" {
 }
 
 resource "aws_key_pair" "a_key" {
-  key_name = "keypair-${random_string.user_id.result}"
+  key_name = "terraform-keypair-${random_string.user_id.result}"
   public_key = data.local_file.ssh_key.content
 }
