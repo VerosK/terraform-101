@@ -42,4 +42,9 @@ resource "aws_instance" "webserver" {
     Name = "Terraform - ${random_string.user_id.result}"
     purpose = "terraform-training"
   }
+
+  root_block_device {
+    delete_on_termination = true
+    volume_size = 10
+  }
 }
