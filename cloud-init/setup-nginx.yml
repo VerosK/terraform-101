@@ -1,3 +1,8 @@
 #cloud-config
 packages:
     - nginx
+
+runcmd:
+    # create index.html
+    - curl http://ifconfig.co/json > /var/www/html/index.html
+
