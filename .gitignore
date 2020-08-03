@@ -1,2 +1,5 @@
 aws-credentials.ini
 .terraform
+*.tfstate*
+*.tfvars
+*.tfplan
