@@ -30,9 +30,8 @@ resource "aws_instance" "webserver" {
 
   lifecycle {
     // prevent_destroy = true
-    ignore_changes = [
-      "key_name"]
-  }
+    ignore_changes = [ key_name ] 
+}
 
   // count = var.create_instance ? 2 : 0
 }
