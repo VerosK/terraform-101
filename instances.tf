@@ -8,7 +8,6 @@ resource "random_string" "user_id" {
   upper = false
   special = false
   number = false
-
 }
 
 resource "aws_key_pair" "access_key" {
@@ -35,15 +34,11 @@ resource "aws_instance" "webserver" {
       "key_name"]
   }
 
-  count = var.create_instance ? 2 : 0
-}
-
-resource "local_file" "ansible_inventory" {
-  filename = "hosts.txt"
-  content = "${join("\n", aws_instance.webserver.*.public_ip)}\n"
+  // count = var.create_instance ? 2 : 0
 }
 
 output "instance_ip" {
-  value = "${aws_instance.webserver.*.public_ip}"
+  value = "${aws_instance.webserver.public_ip}"
 }
+
 
