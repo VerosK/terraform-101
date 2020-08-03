@@ -24,7 +24,7 @@ resource "aws_instance" "webserver" {
   associate_public_ip_address = true
 
   tags = {
-    Name = "Workshop - ${random_string.user_id.result} - ${count.index}"
+    Name = "Workshop - ${random_string.user_id.result}"
     Purpose = "Terraform workshop"
   }
 
