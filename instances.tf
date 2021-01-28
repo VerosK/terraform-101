@@ -31,13 +31,14 @@ resource "aws_instance" "webserver" {
   lifecycle {
     // prevent_destroy = true
     ignore_changes = [ key_name ] 
-}
+  }
+
+  root_block_device {
+      delete_on_termination = true
+  }
 
   // count = var.create_instance ? 2 : 0
 }
 
-output "instance_ip" {
-  value = aws_instance.webserver.public_ip
-}
 
 
