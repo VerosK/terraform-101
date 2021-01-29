@@ -30,7 +30,7 @@ resource "aws_key_pair" "a_key" {
 }
 
 data "aws_security_group" "default_group" {
-  name = "teraform-workshop"
+  name = "terraform-workshop"
 }
 
 variable "availability_zones" {
