@@ -1,21 +1,21 @@
 data "aws_ami" "debian_10" {
-  owners = ["136693071363"]
+  owners      = ["136693071363"]
   most_recent = true
 
   filter {
-    name = "name"
+    name   = "name"
     values = ["debian-10-*"]
   }
   filter {
-    name = "architecture"
+    name   = "architecture"
     values = ["x86_64"]
   }
   filter {
-    name = "root-device-type"
+    name   = "root-device-type"
     values = ["ebs"]
   }
   filter {
-    name = "virtualization-type"
+    name   = "virtualization-type"
     values = ["hvm"]
   }
 }
@@ -25,7 +25,7 @@ data "local_file" "ssh_key" {
 }
 
 resource "aws_key_pair" "a_key" {
-  key_name = "terraform-keypair-${random_string.user_id.result}"
+  key_name   = "terraform-keypair-${random_string.user_id.result}"
   public_key = data.local_file.ssh_key.content
 }
 
@@ -34,42 +34,42 @@ data "aws_security_group" "default_group" {
 }
 
 variable "availability_zones" {
-  type = list(string)
-  default = [ "eu-central-1a", "eu-central-1b", "eu-central-1c" ]
+  type    = list(string)
+  default = ["eu-central-1a", "eu-central-1b", "eu-central-1c"]
 }
 
 resource "aws_instance" "webserver" {
-  ami = data.aws_ami.debian_10.id
+  ami           = data.aws_ami.debian_10.id
   instance_type = "t3.micro"
-  key_name = aws_key_pair.a_key.key_name
-  monitoring = false
+  key_name      = aws_key_pair.a_key.key_name
+  monitoring    = false
 
   associate_public_ip_address = true
-  user_data = file("cloud-init/setup-nginx.yml")
-  security_groups = [ data.aws_security_group.default_group.name ]
+  user_data                   = file("cloud-init/setup-nginx.yml")
+  security_groups             = [data.aws_security_group.default_group.name]
 
   tags = {
-    Name = "Terraform - ${random_string.user_id.result}"
+    Name    = "Terraform - ${random_string.user_id.result}"
     purpose = "terraform-training"
   }
 
   root_block_device {
     delete_on_termination = true
-    volume_size = 10
+    volume_size           = 10
   }
 
   lifecycle {
-    ignore_changes = [ "ami" ]
+    ignore_changes = [ami]
   }
 
-  availability_zone = element(var.availability_zones,count.index)
-  count = 3
+  availability_zone = element(var.availability_zones, count.index)
+  count             = 3
 }
 
 resource "aws_elb_attachment" "attach" {
   // instance = "${element(count.index, aws_instance.webserver.*.id)}"
   instance = aws_instance.webserver[count.index].id
-  elb = aws_elb.central-lb.id
+  elb      = aws_elb.central-lb.id
 
   count = length(aws_instance.webserver)
 }
