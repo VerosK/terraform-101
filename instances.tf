@@ -30,7 +30,7 @@ resource "aws_key_pair" "a_key" {
 }
 
 data "aws_security_group" "default_group" {
-  name = "allow-ssh-only"
+  name = "teraform-workshop"
 }
 
 variable "availability_zones" {
@@ -62,7 +62,7 @@ resource "aws_instance" "webserver" {
     ignore_changes = [ "ami" ]
   }
 
-  availability_zone = "${element(var.availability_zones,count.index)}"
+  availability_zone = element(var.availability_zones,count.index)
   count = 3
 }
 
