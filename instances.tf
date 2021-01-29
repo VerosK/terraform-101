@@ -49,7 +49,7 @@ resource "aws_instance" "webserver" {
   security_groups             = [data.aws_security_group.default_group.name]
 
   tags = {
-    Name    = "Terraform - ${random_string.user_id.result}"
+    Name    = "Terraform - ${random_string.user_id.result} - ${count.index}"
     purpose = "terraform-training"
   }
 
