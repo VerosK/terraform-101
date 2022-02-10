@@ -16,7 +16,7 @@ resource "aws_key_pair" "access_key" {
 }
 
 resource "aws_instance" "webserver" {
-  ami = "ami-dd3c0f36"
+  ami = "ami-04f5641b0d178a27a"
   instance_type = "t3.micro"
   key_name = aws_key_pair.access_key.key_name
   monitoring = false
