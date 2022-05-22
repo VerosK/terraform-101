@@ -1,2 +1,2 @@
 create_instance = true
-aws_region = "eu-central-1"
+aws_region = "eu-west-1"
