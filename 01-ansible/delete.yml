@@ -1,0 +1,16 @@
+- name: Drop bucket with objects
+  hosts: localhost
+  tasks:
+
+    - name: Put object
+      amazon.aws.s3:
+        bucket: terraform-demo-bucket
+        object: hello-world.txt
+        content: |
+            Hello, world
+
+
+    - name: drop bucket
+      amazon.aws.s3_bucket:
+        name: terraform-demo-bucket
+        state: absent
