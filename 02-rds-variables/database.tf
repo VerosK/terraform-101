@@ -8,10 +8,16 @@ resource "aws_security_group" "mysql" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+  ingress {
+    from_port = 0
+    protocol  = "icmp"
+    to_port   = 0
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 }
 
 resource "aws_db_instance" "mysql" {
-  name                    = "main"
+  db_name                 = "main"
   identifier              = "tf-${random_string.suffix.result}"
   engine                  = "mariadb"
   engine_version          = "10.6.7"
