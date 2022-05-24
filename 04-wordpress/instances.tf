@@ -24,13 +24,10 @@ data "local_file" "ssh_key" {
   filename = pathexpand("~/.ssh/id_rsa.pub")
 }
 
+
 resource "aws_key_pair" "a_key" {
   key_name   = "terraform-keypair-${random_string.user_id.result}"
   public_key = data.local_file.ssh_key.content
-}
-
-data "aws_security_group" "default_group" {
-  name = "terraform-workshop"
 }
 
 variable "availability_zones" {
