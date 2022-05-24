@@ -9,9 +9,9 @@ resource "aws_security_group" "mysql" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   ingress {
-    from_port = 0
-    protocol  = "icmp"
-    to_port   = 0
+    from_port   = 0
+    protocol    = "icmp"
+    to_port     = 0
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
