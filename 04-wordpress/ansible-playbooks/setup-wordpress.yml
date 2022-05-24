@@ -1,0 +1,9 @@
+- name: Setup wordpress
+  hosts: all
+
+  tasks:
+    - name: Provide wordpress
+      package: 
+         name:
+           - wordpress
+         state: present
