@@ -1,7 +1,7 @@
 
 #!/bin/bash
 
-cat >terraform.sh <<EOF
+cat >00-remote-state.tf <<EOF
 # shared state config
 
 terraform {
