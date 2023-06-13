@@ -1,6 +1,6 @@
 
 resource "aws_security_group" "mysql" {
-  name   = "mysql-access"
+  name   = "mysql-access-${random_string.suffix.result}"
   vpc_id = data.aws_vpc.main.id
   ingress {
     from_port   = 3306
