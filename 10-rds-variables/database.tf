@@ -20,7 +20,7 @@ resource "aws_db_instance" "mysql" {
   db_name                 = "main"
   identifier              = "tf-${random_string.suffix.result}"
   engine                  = "mariadb"
-  engine_version          = "10.6.7"
+  engine_version          = "10.6.13"
   backup_retention_period = 1
 
   username            = var.db_user
