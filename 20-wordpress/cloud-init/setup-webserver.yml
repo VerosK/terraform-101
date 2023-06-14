@@ -1,6 +1,6 @@
 #cloud-config
 packages:
-    - apache
+    - apache2
 
 runcmd:
     # create index.html
