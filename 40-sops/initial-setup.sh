@@ -8,6 +8,6 @@ ACCOUNT_ID=$( aws sts get-caller-identity | jq -r .Account )
 
 mkdir -p secrets
 
-sops --encrypt --kms arn:aws:kms:eu-west-1:599735888825:alias/sops_key --encrypt  cleartext/secrets.yml > secrets/secrets.enc.yml
+sops --encrypt --kms arn:aws:kms:eu-west-1:599735888825:alias/terraform_key --encrypt  cleartext/secrets.yml > secrets/secrets.enc.yml
 
 
