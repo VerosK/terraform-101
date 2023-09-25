@@ -1,0 +1,10 @@
+
+adminer_source: https://github.com/vrana/adminer/releases/download/v4.8.1/adminer-4.8.1.php
+adminer_checksum: 'sha256:2fd7e6d8f987b243ab1839249551f62adce19704c47d3d0c8dd9e57ea5b9c6b3'
+
+adminer_target_dir: /opt/adminer
+
+# TODO: use plugins according to https://github.com/fprochazka/adminer-colors
+#
+#adminer_plugin_source: https://raw.githubusercontent.com/vrana/adminer/master/plugins/plugin.php
+#adminer_plugin_dir: /opt/adminer

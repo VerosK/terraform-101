@@ -1,0 +1,13 @@
+#cloud-config
+packages:
+    - apache2
+
+hostname: adminer-host
+preserve_hostname: false
+
+runcmd:
+    # create index.html
+    #- curl http://ifconfig.co/json > /var/www/html/index.html
+    #- curl http://169.254.169.254/latest/meta-data/hostname > /var/www/html/index.html
+
+# TODO: install python3 to make Ansible happy

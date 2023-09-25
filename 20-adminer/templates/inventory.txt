@@ -1,0 +1,12 @@
+# This file is managed by Terraform, do not touch
+[adminer_hosts]
+%{for host in hosts}
+${host.public_dns}     ansible_host=${host.public_ip}  instance_id=${host.id}
+%{endfor}
+
+[adminer_hosts:vars]
+region=${region}
+instance_size=${hosts[0].instance_type}
+ansible_become=yes
+ansible_user=${admin_user}
+ansible_python_interpreter=python3
