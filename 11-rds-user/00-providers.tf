@@ -1,18 +1,35 @@
 
 terraform {
   required_providers {
-    mysql = {
-      source = "petoju/mysql"
+    postgresql = {
+      source = "cyrilgdn/postgresql"
+      version = "1.21.0"
     }
   }
 }
 
-provider "mysql" {
-  endpoint = var.mysql_host
-  username = var.mysql_user
-  password = var.mysql_password
+// external data source hack
+
+data "terraform_remote_state" "psql" {
+  backend = "local"
+
+  config = {
+    path = "../10-rds-postgres/terraform.tfstate"
+  }
 }
 
-variable "mysql_host" {}
-variable "mysql_user" {}
-variable "mysql_password" {}
+# https://registry.terraform.io/providers/cyrilgdn/postgresql/latest/docs
+
+provider "postgresql" {
+  host            = data.terraform_remote_state.psql.outputs.database_host
+  port            = 5432
+  database        = "postgres"
+  username        = data.terraform_remote_state.psql.outputs.database_user
+  password        = data.terraform_remote_state.psql.outputs.database_password
+  sslmode         = "require"
+  connect_timeout = 15
+}
+
+resource "postgresql_role" "foo" {
+   name = "foo"
+}
