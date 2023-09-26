@@ -1,0 +1,6 @@
+resource "local_sensitive_file" "my_cnf" {
+   content = "[client]\nhost=${aws_db_instance.main.address}\nuser=${aws_db_instance.main.username}\npassword=${aws_db_instance.main.password}\n"
+   filename = pathexpand("~/.my.cnf")
+   file_permission = "0600"
+}
+
