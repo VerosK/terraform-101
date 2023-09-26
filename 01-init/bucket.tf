@@ -13,7 +13,7 @@ resource "aws_s3_bucket" "bucket" {
   }
 }
 
-resource "aws_s3_bucket_object" "object" {
+resource "aws_s3_object" "object" {
   bucket  = aws_s3_bucket.bucket.bucket
   key     = "hello.txt"
   content = "Hello, world"
