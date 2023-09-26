@@ -1,17 +1,9 @@
-- name: Create bucket and upload object
+- name: Create bucket
   hosts: localhost
   tasks:
 
     - name: Create bucket
       amazon.aws.s3_bucket:
-        name: terraform-demo-bucket
+        name: terraform-demo-bucket-022432
         state: present
         region: us-west-1
-
-
-    - name: Put object
-      amazon.aws.s3:
-        bucket: terraform-demo-bucket
-        object: hello-world.txt
-        content: |
-            Hello, world
