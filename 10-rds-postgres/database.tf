@@ -18,7 +18,7 @@ resource "aws_security_group" "postgres" {
 
 resource "aws_db_instance" "main" {
   #db_name                 = "main"
-  identifier              = "tf-pg- ${random_string.suffix.result}"
+  identifier              = "tf-pg-${random_string.suffix.result}"
   engine                  = "postgres"
   engine_version          = "14.5"
   backup_retention_period = 1
