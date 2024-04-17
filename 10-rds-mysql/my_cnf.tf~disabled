@@ -1,5 +1,12 @@
 resource "local_sensitive_file" "my_cnf" {
-   content = "[client]\nhost=${aws_db_instance.main.address}\nuser=${aws_db_instance.main.username}\npassword=${aws_db_instance.main.password}\n"
+   content =<<EOF
+; terraform managed
+[client]
+host=${aws_db_instance.mysql.address}
+user=${aws_db_instance.mysql.username}
+password=${aws_db_instance.mysql.password}
+EOF
+
    filename = pathexpand("~/.my.cnf")
    file_permission = "0600"
 }
