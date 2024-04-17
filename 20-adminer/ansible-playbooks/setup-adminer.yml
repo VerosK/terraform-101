@@ -31,6 +31,11 @@
         checksum: "{{ adminer_checksum }}"
         mode: 0644
 
+    - name: Remove stale index.html
+      file:
+        dest: /var/www/html/index.html
+        state: absent
+
     - name: Provide index.php
       copy:
         content: |
