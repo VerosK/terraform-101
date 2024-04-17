@@ -2,7 +2,7 @@
 terraform {
   required_providers {
     postgresql = {
-      source = "cyrilgdn/postgresql"
+      source  = "cyrilgdn/postgresql"
       version = "1.21.0"
     }
   }
@@ -28,8 +28,6 @@ provider "postgresql" {
   password        = data.terraform_remote_state.psql.outputs.database_password
   sslmode         = "require"
   connect_timeout = 15
+  superuser       = false
 }
 
-resource "postgresql_role" "foo" {
-   name = "foo"
-}

@@ -1,3 +1,8 @@
+resource "postgresql_role" "foo" {
+  name     = "foo"
+  login    = true
+  password = "very-foobar"
+}
 
 resource "postgresql_database" "my_db" {
   name              = "my_db"
