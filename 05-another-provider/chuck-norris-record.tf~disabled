@@ -8,7 +8,7 @@ data "http" "chuck_norris" {
 }
 
 locals {
-  joke = jsondecode(data.http.chuck_norris.request_body).value
+  joke = jsondecode(data.http.chuck_norris.response_body).value
 }
 
 resource "dns_txt_record_set" "magic" {
@@ -21,5 +21,5 @@ resource "dns_txt_record_set" "magic" {
 }
 
 output "a_joke" {
-  value = jsondecode(data.http.chuck_norris.body).value
+  value = jsondecode(data.http.chuck_norris.response_body).value
 }
