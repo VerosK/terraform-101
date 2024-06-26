@@ -1,3 +1,4 @@
+# record.tf
 
 resource "dns_a_record_set" "www" {
   zone      = "dyn.gpx.cz."
