@@ -1,5 +1,6 @@
 module "db" {
   source = "terraform-aws-modules/rds/aws"
+  version = "6.10.0"
 
    identifier = "demodb"
 
