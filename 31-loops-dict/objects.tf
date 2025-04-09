@@ -1,3 +1,4 @@
+# objects.tf
 
 variable "object_names" {
    type = list(string)
